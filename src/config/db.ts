@@ -12,6 +12,8 @@ export const db = mysql.createPool({
   port: parseInt(process.env.DB_PORT || "3306"),
 });
 
+console.log("DB NAME:", process.env.DB_NAME);
+
 export const connectToDatabase = async () => {
   try {
     await db.getConnection();
