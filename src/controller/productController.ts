@@ -54,6 +54,51 @@ export const fetchAllProducts = async (req: Request, res: Response) => {
 // GET ONE PRODUCT BY ID
 // -------------------------
 
+export const fetchProduct = async (req: Request, res: Response) => {
+  console.log(req.params);
+  const id: number = Number(req.params.id);
+
+  try {
+    const [rows] = await db.query<IProductDBResponse[]>(
+      `
+      SELECT *
+      FROM products
+      WHERE products.product_id = ?
+    `,
+      [id],
+    );
+
+    const product = rows[0];
+    if (!product) {
+      res.status(404).json({ message: "Product not found" });
+      return;
+    }
+
+    res.json(await formattedProduct(rows, id));
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: message });
+  }
+};
+
+//
+const formattedProduct = async (
+  rows: IProductDBResponse[],
+  product_id: number,
+) => {
+  const productRow = rows[0]!;
+
+  return {
+    product_id: productRow.product_id,
+    product_title: productRow.product_title,
+    product_description: productRow.product_description,
+    product_stock: productRow.product_stock,
+    product_price: productRow.product_price,
+    product_image: productRow.product_image,
+    product_created_date: productRow.product_created_date,
+  };
+};
+
 // -------------------------
 // CREATE PRODUCT
 // -------------------------
