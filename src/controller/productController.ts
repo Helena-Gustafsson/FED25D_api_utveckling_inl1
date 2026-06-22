@@ -221,3 +221,23 @@ export const updateProduct = async (req: Request, res: Response) => {
 // -------------------------
 // DELETE PRODUCT
 // -------------------------
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    const sql = `
+      DELETE FROM products 
+      WHERE product_id = ?
+    `;
+    const [result] = await db.query<ResultSetHeader>(sql, [id]);
+    if (result.affectedRows === 0) {
+      res.status(404).json({ message: "Product not found" });
+      return; // makes sure that we are done with this function, enabling other calls to work after
+    }
+    res.json({ message: "Product deleted" });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: message });
+  }
+};
