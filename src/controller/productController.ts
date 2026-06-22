@@ -158,6 +158,66 @@ export const createProduct = async (req: Request, res: Response) => {
 // UPDATE PRODUCT
 // -------------------------
 
+export const updateProduct = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const {
+    product_title,
+    product_description,
+    product_stock,
+    product_price,
+    product_image,
+  } = req.body;
+
+  try {
+    const fields: string[] = [];
+    const values: any[] = [];
+
+    if (product_title !== undefined) {
+      fields.push("product_title = ?");
+      values.push(product_title);
+    }
+    if (product_description !== undefined) {
+      fields.push("product_description = ?");
+      values.push(product_description);
+    }
+    if (product_stock !== undefined) {
+      fields.push("product_stock = ?");
+      values.push(product_stock);
+    }
+    if (product_price !== undefined) {
+      fields.push("product_price = ?");
+      values.push(product_price);
+    }
+    if (product_image !== undefined) {
+      fields.push("product_image = ?");
+      values.push(product_image);
+    }
+
+    if (fields.length === 0) {
+      return res.status(400).json({ error: "No fields provided to update" });
+    }
+
+    const sql = `
+      UPDATE products
+      SET ${fields.join(", ")}
+      WHERE product_id = ?
+    `;
+
+    values.push(id);
+
+    const [result] = await db.query<ResultSetHeader>(sql, values);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json({ message: "Product updated" });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: message });
+  }
+};
+
 // -------------------------
 // DELETE PRODUCT
 // -------------------------
