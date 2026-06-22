@@ -103,6 +103,57 @@ const formattedProduct = async (
 // CREATE PRODUCT
 // -------------------------
 
+export const createProduct = async (req: Request, res: Response) => {
+  const {
+    product_title,
+    product_description,
+    product_stock,
+    product_price,
+    product_image,
+  } = req.body;
+
+  if (
+    !product_title ||
+    !product_description ||
+    !product_stock ||
+    !product_price ||
+    !product_image
+  ) {
+    res.status(400).json({ error: "All fields are required" });
+    return;
+  }
+
+  try {
+    const sql = `
+      INSERT INTO products (product_title, product_description, product_stock, product_price, product_image)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+
+    const [result] = await db.query<ResultSetHeader>(sql, [
+      product_title,
+      product_description,
+      product_stock,
+      product_price,
+      product_image,
+    ]);
+
+    res.status(201).json({
+      message: "Product created",
+      newProduct: {
+        id: result.insertId,
+        product_title,
+        product_description,
+        product_stock,
+        product_price,
+        product_image,
+      },
+    });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    res.status(500).json({ error: message });
+  }
+};
+
 // -------------------------
 // UPDATE PRODUCT
 // -------------------------
