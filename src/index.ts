@@ -6,6 +6,7 @@ import "dotenv/config";
 import express from "express";
 import type { Request, Response } from "express";
 import productRouter from "./routers/productRouter.js";
+import categoryRouter from "./routers/categoryRouter.js";
 
 const app = express();
 const PORT = 3000;
@@ -36,6 +37,7 @@ app.use(cors());
 // -------------------------
 
 app.use("/products", productRouter);
+app.use("/categories", categoryRouter);
 
 // -------------------------
 // START SERVER
