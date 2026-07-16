@@ -184,3 +184,31 @@ export const updateCategory = async (req: Request, res: Response) => {
 // -------------------------
 // DELETE CATEGORY
 // -------------------------
+
+export const deleteCategory = async (req: Request, res: Response) => {
+  const categoryId = Number(req.params.id);
+
+  if (isNaN(categoryId)) {
+    return res.status(400).json({ error: "Invalid category ID" });
+  }
+
+  try {
+    const sql = `
+      DELETE FROM categories
+      WHERE category_id = ?
+    `;
+
+    const [result] = await db.query<ResultSetHeader>(sql, [categoryId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    res.json({ message: "Category deleted" });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Unknown server error";
+
+    res.status(500).json({ error: message });
+  }
+};
