@@ -6,6 +6,7 @@ import type { Request, Response } from "express";
 import { db } from "../config/db.js";
 import type { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 import type { ICategoryDBResponse } from "../models/InterfaceDbCategory.js";
+import type { IProductDBResponse } from "../models/InterfaceDbProducts.js";
 
 // ----------------------------
 // GET ALL CATEGORIES
@@ -26,13 +27,73 @@ export const fetchAllCategories = async (req: Request, res: Response) => {
   }
 };
 
-// -------------------------
+// ---------------------------------
 // GET PRODUCTS BY CATEGORY ID
-// -------------------------
+// ---------------------------------
+//*** p = products
+//*** pcl = product_category_link
+//*** c = categories
+//*** isNaN = is Not a Number
 
-// -------------------------
-// CREATE CATEGORY
-// -------------------------
+export const fetchProductsByCategory = async (req: Request, res: Response) => {
+  const categoryId = Number(req.params.id);
+
+  if (isNaN(categoryId)) {
+    return res.status(400).json({ error: "Invalid category ID" });
+  }
+
+  try {
+    // 1. Hämta kategoriinfo
+    const categorySql = `
+      SELECT category_id, category_name
+      FROM categories
+      WHERE category_id = ?
+    `;
+    const [categoryRows] = await db.query<ICategoryDBResponse[]>(categorySql, [
+      categoryId,
+    ]);
+
+    const category = categoryRows[0];
+
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+
+    // 2. Hämta produkter (din befintliga JOIN)
+    const productSql = `
+      SELECT 
+        p.product_id,
+        p.product_title,
+        p.product_description,
+        p.product_stock,
+        p.product_price,
+        p.product_image,
+        p.product_created_date
+      FROM products AS p
+      INNER JOIN product_category_link AS pcl
+        ON p.product_id = pcl.product_connect_id
+      INNER JOIN categories AS c
+        ON c.category_id = pcl.category_connect_id
+      WHERE c.category_id = ?
+    `;
+
+    const [rows] = await db.query<IProductDBResponse[]>(productSql, [
+      categoryId,
+    ]);
+
+    // 3. Returnera kategori + produkter
+    return res.status(200).json({
+      category_id: category.category_id,
+      category_name: category.category_name,
+      products: rows,
+    });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Unknown server error";
+
+    res.status(500).json({ error: message });
+  }
+};
 
 // ----------------------------
 // CREATE CATEGORY
