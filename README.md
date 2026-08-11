@@ -47,6 +47,10 @@ Ihop klipp av bild exempel från Insomnia för kategorier och produkter
 
 <img width="1044" height="590" alt="API (deleted product - category)" src="https://github.com/user-attachments/assets/72ae2d53-8ab0-48ea-a478-94f298421bc5" />
 
+## 🗂️ Projektstruktur (VS Code) 
+
+<img width="1868" height="712" alt="image" src="https://github.com/user-attachments/assets/613d9f55-4e73-4fdb-8e67-f449c0e90785" />
+
 ## 🛠️ Tekniker som använts
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
