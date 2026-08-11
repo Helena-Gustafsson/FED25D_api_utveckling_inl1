@@ -25,25 +25,25 @@ API:t är byggt enligt kursens krav för **API‑utveckling**, med tydlig strukt
 
 <img width="1919" height="992" alt="image" src="https://github.com/user-attachments/assets/e243b222-01a9-4c27-bc91-918591e3a622" />
 
-##🔵 Insomnia
+## 🔵 Insomnia
 
 Ihop klipp av bild exempel från Insomnia för kategorier och produkter
 
-# 🟦 GET
+### 🟦 GET
 
 <img width="2039" height="931" alt="API (fetch all categories - get products by category)" src="https://github.com/user-attachments/assets/b78c051a-db1c-4d38-85ca-cbabe8f42306" />
 
 <img width="1384" height="1362" alt="API (get all products - product by ID)" src="https://github.com/user-attachments/assets/a95cb0cb-2375-4869-815f-90f2e3d013b9" />
 
-# 🟩 POST
+### 🟩 POST
 
 <img width="1387" height="903" alt="API (create product - create category)" src="https://github.com/user-attachments/assets/ca0c09d2-2095-49bc-b62a-85ad52292abe" />
 
-# 🟨 PTCH
+### 🟨 PTCH
 
 <img width="1042" height="664" alt="API (patch category - product)" src="https://github.com/user-attachments/assets/10494395-c34a-4202-8141-cd1f48d43727" />
 
-# 🟥 DEL
+### 🟥 DEL
 
 <img width="1044" height="590" alt="API (deleted product - category)" src="https://github.com/user-attachments/assets/72ae2d53-8ab0-48ea-a478-94f298421bc5" />
 
