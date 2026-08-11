@@ -47,6 +47,42 @@ Ihop klipp av bild exempel från Insomnia för kategorier och produkter
 
 <img width="1044" height="590" alt="API (deleted product - category)" src="https://github.com/user-attachments/assets/72ae2d53-8ab0-48ea-a478-94f298421bc5" />
 
+## 🧭 API‑endpoints (URL‑vägar)
+
+### 🎵 Products
+
+🟦 GET /products  
+Hämta alla produkter.
+
+🟦 GET /products/:id  
+Hämta en specifik produkt.
+
+🟩 POST /products  
+Skapa en ny produkt.
+
+🟨 PTCH /products/:id  
+Uppdatera en produkt.
+
+🟥 DEL /products/:id  
+Ta bort en produkt.
+
+### 🎼 Categories
+
+🟦 GET /categories  
+Hämta alla kategorier.
+
+🟦 GET /categories/:id/products  
+Hämta alla produkter som tillhör en kategori.
+
+🟩 POST /categories  
+Skapa en ny kategori.
+
+🟨 PTCH /categories/:id  
+Uppdatera en kategori.
+
+🟥 DEL /categories/:id  
+Ta bort en kategori.
+
 ## 🗂️ Projektstruktur (VS Code) 
 
 <img width="1868" height="712" alt="image" src="https://github.com/user-attachments/assets/613d9f55-4e73-4fdb-8e67-f449c0e90785" />
