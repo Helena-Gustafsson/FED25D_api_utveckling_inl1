@@ -22,6 +22,7 @@ API:t är byggt enligt kursens krav för **API‑utveckling**, med tydlig strukt
 <img width="855" height="719" alt="image" src="https://github.com/user-attachments/assets/29dc1bc0-b97f-4e87-9359-264dc2847177" />
 
 ## 🟡 Bildöversikt av min databas i Beekeeper Studio med produkter och kategorier
+(PS. Notera att de exporterade SQL filerna från beekeper ligger i foldern src/misc-SQL-files) 
 
 <img width="1919" height="992" alt="image" src="https://github.com/user-attachments/assets/e243b222-01a9-4c27-bc91-918591e3a622" />
 
