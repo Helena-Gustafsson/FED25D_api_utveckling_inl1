@@ -34,6 +34,7 @@ export const fetchAllCategories = async (req: Request, res: Response) => {
 //*** pcl = product_category_link
 //*** c = categories
 //*** isNaN = is Not a Number
+//*** Try/catch för att hantera databasfel och oväntade serverfel
 
 export const fetchProductsByCategory = async (req: Request, res: Response) => {
   const categoryId = Number(req.params.id);
@@ -43,7 +44,7 @@ export const fetchProductsByCategory = async (req: Request, res: Response) => {
   }
 
   try {
-    // 1. Hämta kategoriinfo
+    // Hämta kategoriinfo
     const categorySql = `
       SELECT category_id, category_name
       FROM categories
@@ -59,7 +60,7 @@ export const fetchProductsByCategory = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Category not found" });
     }
 
-    // 2. Hämta produkter (din befintliga JOIN)
+    // Hämta produkter
     const productSql = `
       SELECT 
         p.product_id,
@@ -81,7 +82,7 @@ export const fetchProductsByCategory = async (req: Request, res: Response) => {
       categoryId,
     ]);
 
-    // 3. Returnera kategori + produkter
+    //Returnera kategori + produkter
     return res.status(200).json({
       category_id: category.category_id,
       category_name: category.category_name,
