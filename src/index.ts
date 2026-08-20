@@ -16,7 +16,7 @@ const PORT = 3000;
 // -------------------------
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("E-shop");
+  res.send({ message: "Welcome to the Music Shop API" });
 });
 
 // -------------------------

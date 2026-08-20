@@ -5,7 +5,6 @@
 import type { Request, Response } from "express";
 import { db } from "../config/db.js";
 import type { ResultSetHeader, RowDataPacket } from "mysql2/promise";
-//TO DO import { fetchCategories } from "../db/reviewDb.js";
 import type { IProductDBResponse } from "../models/InterfaceDbProducts.js";
 
 // -------------------------
