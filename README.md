@@ -9,13 +9,13 @@ API:t hanterar produkter och kategorier för en musikshop och innehåller:
 - Full CRUD för kategorier
 - Many‑to‑many‑relation mellan produkter och kategorier via en länktabell
 - Sökfunktion (search) för att hitta produkter efter titel
-- Sortering (sort + order) för att sortera produkter efter pris
+- Sortering (sort + order) för att sortera produkter efter pris, produktnamn och ID.
 - Normaliserad databasstruktur (3NF)
-- Felhantering och validering enligt kursens riktlinjer
-- Mock‑data för att snabbt kunna testa API:t (gitarrer, piano, trumset, noter m.m.)
+- Felhantering och validering
+- Mock‑data för att snabbt kunna testa API:t (endast en bild URL som exempel)
 - Aiven‑hostad MySQL‑databas
 
-API:t är byggt enligt kursens krav för **API‑utveckling**, med tydlig struktur, separerade controllers, routers, databas‑konfiguration, miljövariabler för säkerhet, interface‑hantering och en README som dokumenterar hela projektet.
+API:t är byggt enligt kursens krav för **API‑utveckling**, med tydlig struktur, separerade controllers, routers, databas‑konfiguration, miljövariabler för säkerhet, interface‑hantering och en README som dokumenterar projektet.
 
 ## 📊 ER‑diagram
 
